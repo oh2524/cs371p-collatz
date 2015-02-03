@@ -29,36 +29,46 @@ pair<int, int> collatz_read (const string& s) {
     sin >> i >> j;
     return make_pair(i, j);}
 
+
+int evalh(int i) {
+    int temp_cycle = 1;
+    while (i != 1)
+    {
+        if (i%2 == 0)       // even
+            i = i/2;
+        else                // odd
+            i = 3*i + 1;
+        temp_cycle++;
+    }
+
+    return temp_cycle;
+}
+
 // ------------
 // collatz_eval
 // ------------
 
 int collatz_eval (int i, int j) {
-    if(j < i)
+    if (j < i)
     {
-	int temp = i;
-	i = j;
-	j = temp;
+    	int temp = i;
+    	i = j;
+    	j = temp;
     }
+
     assert(i > 0);
     assert(j < 1000000);
-    assert(i != j);
+
+    if (i == j)
+        return evalh(i);
 
     int max_cycle = 1;
     for (int x = i; x <= j; x++)
     {
-    	int temp_cycle = 1;
-	while (x != 1)
-	{
-		if (x%2 == 0)		// even
-			x = x/2;
-		else			// odd
-			x = 3*x + 1;
-		temp_cycle++;
-	}
+        int temp_cycle = evalh(x);
 
-	if (temp_cycle > max_cycle)
-		max_cycle = temp_cycle;
+    	if (temp_cycle > max_cycle)
+    		max_cycle = temp_cycle;
     }
     assert(max_cycle >= 1);
     return max_cycle;
