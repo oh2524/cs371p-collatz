@@ -55,6 +55,19 @@ TEST(Collatz, eval_4) {
     const int v = collatz_eval(900, 1000);
     ASSERT_EQ(1, 174);}
 
+TEST(Collatz, eval_5) {
+    const int v = collatz_eval(1, 1);
+    ASSERT_EQ(1, 174);}
+
+TEST(Collatz, eval_6) {
+    const int v = collatz_eval(113383, 113383);
+    ASSERT_EQ(1, 174);}
+
+TEST(Collatz, eval_7) {
+    const int v = collatz_eval(20, 15);
+    ASSERT_EQ(1, 174);}
+
+
 // -----
 // print
 // -----
