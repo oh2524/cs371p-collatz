@@ -14,6 +14,7 @@
 #include <string>   // getline, string
 #include <utility>  // make_pair, pair
 
+#include "Collatz.h"
 
 using namespace std;
 
@@ -37,11 +38,11 @@ int evalh(int i) {
     {
     	// cout << "Temp Cycle: " << temp_cycle << endl;
 	// cout << "i: " << i << endl;
-        if (i%2 == 0)       // even
-            i = i/2;
-        else                // odd
-            i = 3*i + 1;
-        temp_cycle++;
+	if (i%2 == 0)
+		i = i/2;
+	else 
+		i = 3*i + 1;
+	temp_cycle++;
     }
     // cout << "Temp Cycle: " << temp_cycle << endl;
     // cout << "i: " << i << endl;
@@ -69,13 +70,21 @@ int collatz_eval (int i, int j) {
         return evalh(i);
 
     int max_cycle = 1;
-    for (int x = i; x <= j; x++)
-    {
-        int temp_cycle = evalh(x);
+    if (j/2 + 1 > i)
+    	for (int x = j/2+1; x <= j; x++)
+   	{
+       	 	int temp_cycle = evalh(x);
+    		if (temp_cycle > max_cycle)
+    			max_cycle = temp_cycle;
+    	}
+    else
+    	for (int x = i; x <= j; x++)
+	{
+		int temp_cycle = evalh(x);
+		if (temp_cycle > max_cycle)
+			max_cycle = temp_cycle;
+	}
 
-    	if (temp_cycle > max_cycle)
-    		max_cycle = temp_cycle;
-    }
     assert(max_cycle >= 1);
     return max_cycle;
 }
@@ -118,6 +127,8 @@ void collatz_solve (istream& r, ostream& w) {
 // --------
 
 #include <iostream> // cin, cout
+
+#include "Collatz.h"
 
 // ----
 // main
