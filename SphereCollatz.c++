@@ -17,7 +17,7 @@
 #include "Collatz.h"
 
 using namespace std;
-
+int* cache;
 // ------------
 // collatz_read
 // ------------
@@ -30,9 +30,10 @@ pair<int, int> collatz_read (const string& s) {
     return make_pair(i, j);}
 
 
-int evalh(int i) {
+int evalh(int x) {
     // cout << "eval helper" << endl;
     // cout << i << endl;
+    unsigned int i = x;
     int temp_cycle = 1;
     while (i != 1)
     {
@@ -64,26 +65,24 @@ int collatz_eval (int i, int j) {
     }
 
     assert(i > 0);
-    assert(j < 113383);
 
     if (i == j)
         return evalh(i);
 
     int max_cycle = 1;
-    if (j/2 + 1 > i)
-    	for (int x = j/2+1; x <= j; x++)
-   	{
-       	 	int temp_cycle = evalh(x);
+    int start = (j/2 + 1 > i) ? (j/2 + 1) : i;
+    
+    for (int x = start; x <= j; x++)
+    {
+    	if (cache[x] != 0)
+		max_cycle = (cache[x] > max_cycle) ? cache[x] : max_cycle;
+	else {
+    		int temp_cycle = evalh(x);
+		cache[x] = temp_cycle;
     		if (temp_cycle > max_cycle)
     			max_cycle = temp_cycle;
-    	}
-    else
-    	for (int x = i; x <= j; x++)
-	{
-		int temp_cycle = evalh(x);
-		if (temp_cycle > max_cycle)
-			max_cycle = temp_cycle;
 	}
+    }
 
     assert(max_cycle >= 1);
     return max_cycle;
@@ -101,13 +100,16 @@ void collatz_print (ostream& w, int i, int j, int v) {
 // -------------
 
 void collatz_solve (istream& r, ostream& w) {
+    cache = new int[4194304];
     string s;
     while (getline(r, s)) {
         const pair<int, int> p = collatz_read(s);
         const int            i = p.first;
         const int            j = p.second;
         const int            v = collatz_eval(i, j);
-        collatz_print(w, i, j, v);}}
+        collatz_print(w, i, j, v);}
+    delete[] cache;
+}
 // -------------------------------
 // projects/collatz/RunCollatz.c++
 // Copyright (C) 2015
