@@ -30,9 +30,10 @@ pair<int, int> collatz_read (const string& s) {
     return make_pair(i, j);}
 
 
-int evalh(int i) {
+int evalh(int x) {
     // cout << "eval helper" << endl;
     // cout << i << endl;
+    unsigned int i = x;
     int temp_cycle = 1;
     while (i != 1)
     {
@@ -64,7 +65,8 @@ int collatz_eval (int i, int j) {
     }
 
     assert(i > 0);
-    assert(j < 113383);
+    cout << "J: " << j << endl;
+    assert(j < 1000000);
 
     if (i == j)
         return evalh(i);
