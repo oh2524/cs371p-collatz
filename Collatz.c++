@@ -16,8 +16,8 @@
 
 #include "Collatz.h"
 
+int *cache;
 using namespace std;
-int* cache;
 // ------------
 // collatz_read
 // ------------
@@ -29,26 +29,29 @@ pair<int, int> collatz_read (const string& s) {
     sin >> i >> j;
     return make_pair(i, j);}
 
-
+/*
+ * helper method for collatz_eval
+ * Takes an int and returns its cycle length
+ * if input int x is in cache, return the cached value
+ * else processes its cycle length and stores it in the cache[x]
+ */
 int evalh(int x) {
     // cout << "eval helper" << endl;
     // cout << i << endl;
-    unsigned int i = x;
+    if (cache[x] != 0)	// checks if value is cached
+    	return cache[x];
+    unsigned int i = x;	// converts to unsigned in case of overflow
     int temp_cycle = 1;
-    while (i != 1)
+    while (i != 1)	// (3n+1)/2 loop 
     {
-    	// cout << "Temp Cycle: " << temp_cycle << endl;
-	// cout << "i: " << i << endl;
 	if (i%2 == 0)
 		i = i/2;
 	else 
 		i = 3*i + 1;
 	temp_cycle++;
     }
-    // cout << "Temp Cycle: " << temp_cycle << endl;
-    // cout << "i: " << i << endl;
 
-    // cout << "exit eval helper" << endl;
+    cache[x] = temp_cycle;	// caches new value
     return temp_cycle;
 }
 
@@ -56,15 +59,20 @@ int evalh(int x) {
 // collatz_eval
 // ------------
 
+/*
+ * evaluates the max cycle length between ints i and j
+ * initializes cache, and deallocate it before function exits
+ * checks for reverse ranges
+ * cycle length returned will always be >= 1
+ */
 int collatz_eval (int i, int j) {
+    cache = new int[4194304];
     if (j < i)
     {
     	int temp = i;
     	i = j;
     	j = temp;
     }
-
-    assert(i > 0);
 
     if (i == j)
         return evalh(i);
@@ -74,17 +82,13 @@ int collatz_eval (int i, int j) {
     
     for (int x = start; x <= j; x++)
     {
-    	if (cache[x] != 0)
-		max_cycle = (cache[x] > max_cycle) ? cache[x] : max_cycle;
-	else {
-    		int temp_cycle = evalh(x);
-		cache[x] = temp_cycle;
-    		if (temp_cycle > max_cycle)
-    			max_cycle = temp_cycle;
-	}
+    	int temp_cycle = evalh(x);
+    	if (temp_cycle > max_cycle)
+    		max_cycle = temp_cycle;
     }
 
     assert(max_cycle >= 1);
+    delete []cache;
     return max_cycle;
 }
 
@@ -100,7 +104,6 @@ void collatz_print (ostream& w, int i, int j, int v) {
 // -------------
 
 void collatz_solve (istream& r, ostream& w) {
-    cache = new int[4194304];
     string s;
     while (getline(r, s)) {
         const pair<int, int> p = collatz_read(s);
@@ -108,5 +111,4 @@ void collatz_solve (istream& r, ostream& w) {
         const int            j = p.second;
         const int            v = collatz_eval(i, j);
         collatz_print(w, i, j, v);}
-    delete[] cache;
 }
