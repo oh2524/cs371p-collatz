@@ -1,3 +1,57 @@
+commit ed99705e6a28a6f7e177499d6eb6f15c0e9ad242
+Author: Ouyangzheng Huang <ouyang16@cs.utexas.edu>
+Date:   Thu Feb 5 19:55:39 2015 -0600
+
+    cached, commented, debugged, tests written
+
+commit 2fad46208c4a4f87d88aa7a404e673142ed9d32a
+Author: Ouyangzheng Huang <ouyang16@cs.utexas.edu>
+Date:   Thu Feb 5 05:25:58 2015 -0600
+
+    simplest cache + SphereCollatz
+
+commit 9a37296c14ed8eb25f55b60c158ecf1dca4d455d
+Author: Ouyangzheng Huang <ouyang16@cs.utexas.edu>
+Date:   Thu Feb 5 04:28:02 2015 -0600
+
+    Collatz tweaks, fixed RunCollatz.in
+
+commit 5781113cb079921a947a8c4c66e6c4be590a0a1d
+Author: Ouyangzheng Huang <ouyang16@cs.utexas.edu>
+Date:   Thu Feb 5 03:36:34 2015 -0600
+
+    range optimization is correct, 100 acceptance tests finished
+
+commit 96c77575ec23947a7147bcbfbe9cd02332ca4b85
+Author: Ouyangzheng Huang <ouyang16@cs.utexas.edu>
+Date:   Wed Feb 4 01:57:19 2015 -0600
+
+    Unit Tests updated and corrected
+
+commit 23f18ead8ae3f8c6b64f1094d8a1507bba8eeaec
+Author: Ouyangzheng Huang <ouyang16@cs.utexas.edu>
+Date:   Tue Feb 3 21:42:46 2015 -0600
+
+    Testing Collatz and SphereCollatz; test written for TestCollatz, answers are unverified
+
+commit c8f0ef857ad32876875cd00f27b023d567c39047
+Author: Ouyangzheng Huang <ouyang16@cs.utexas.edu>
+Date:   Tue Feb 3 13:36:45 2015 -0600
+
+    added checks in collatz_eval, added evalh
+
+commit 0327dba20282b76e832e040e446db5984a596b77
+Author: Ouyangzheng Huang <ouyang16@cs.utexas.edu>
+Date:   Tue Feb 3 02:49:00 2015 -0600
+
+    Fixed Collatz.c++ simplest solution, and TestCollatz unit cases
+
+commit 47f40bc64969f9c06d02d3ea3d1344a05dacdefa
+Author: Ouyangzheng Huang <ouyang16@cs.utexas.edu>
+Date:   Tue Feb 3 00:25:06 2015 -0600
+
+    copied files from public repo
+
 commit 28f8aa49d6d0a4407bb5a0eb6d17bd91cbcde3be
 Author: Ouyangzheng Huang <ouyang16@cs.utexas.edu>
 Date:   Mon Feb 2 12:12:32 2015 -0600
